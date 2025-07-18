@@ -23,6 +23,7 @@ export default function Navbar() {
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>
                 <Link to="/faculty">Faculty</Link>
+                <Link to="/departments">Departments</Link>
             </nav>
         </motion.header>
     )

@@ -2,7 +2,14 @@ import React from "react";
 import "./Faculty.css";
 
 export default function SingleFaculty() {
-    <>
-        <h1>Single Faculty</h1>
-    </>
+    return (
+        <div id="professor">
+        <figure>
+          <img src={professor.profile_img} alt={`Profile Picture`} />
+        </figure>
+        <section>
+          <h1>{professor.name}</h1>
+        </section>
+      </div>
+    )
 }
