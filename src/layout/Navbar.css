@@ -1,0 +1,62 @@
+/* Navbar container */
+#navbar {
+    display: flex; /* Lays out child elements in a row, side by side (#brand and #nav-links */
+    justify-content: space-between; /* Pushes the brand to the left and links to the right with space in between */
+    align-items: center; /* Vertically aligns items in the center of navbars height */
+    padding: 1rem 2rem; /* Adds space inside the navbar 1rem top/bottom, 2rem left/right */
+    background-color: #1e1e1e; /* Dark background color */
+    color: white; /* Default text color inside the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow below the navbar for depth */
+}
+
+/* Brand area with image and name */
+#brand {
+    display: flex; /* Makes the image and name appear side by side */
+    align-items: center; /* Vertically centers the image and the name text */
+    gap: 0.5rem;  /* Adds a bit of horitzontal space between the image and name */
+}
+
+#brand img {
+    border-radius: 50%;  /* Makes the image perfeclty center */
+    width: 40px;  /* Set width of image */
+    height: 40px;  /* Set height of image */
+    object-fit: cover;  /* Ensures the image fills its box without distortion */
+}
+
+#brand p {
+    margin: 0;  /* Removes the default paragraph spacing */
+    font-weight: bold;  /* Set font to bold */
+    font-size: 1.2rem;  /* Scales up the text slightlt */
+}
+
+/* Navigation links */
+#nav-links {
+    display: flex;  /* Places all links in a row */
+    gap: 1.5rem;  /* Adds space between each nav link */
+}
+
+#nav-links a {
+    text-decoration: none;  /* Remvoes underlines from the links */
+    color: white; /* Makes the links white to match the dark background*/
+    font-weight: 500; /* Gives the links a medium-bold weight */
+    transition: color 0.2s ease; /* Smooth transition when hovering */
+}
+
+#nav-links a:hover {
+    color: 1e1e1e; /* The transition from earlier makes it smooth, not instant */
+    text-decoration: underline; /* Adds underline to whatever user can click */
+}
+
+.home-container {
+    height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9;
+}
+
+.home-title {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #1e1e1e;
+}
