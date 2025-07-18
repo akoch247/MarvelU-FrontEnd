@@ -2,12 +2,9 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import Layout from "./layout/Layout.jsx";
 import Error404 from './Error404.jsx';
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Routes>
