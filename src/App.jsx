@@ -7,6 +7,8 @@ import Login from "./login/Login.jsx";
 import Register from './login/Register.jsx';
 import FacultyPage from './faculty/FacultyPage.jsx';
 import SingleFaculty from './faculty/SingleFaculty.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
