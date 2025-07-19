@@ -1,6 +1,6 @@
 import React from "react";
-import useQuery from "../api/useQuery";
-import useMutation from "../api/useMutation";
+// import useQuery from "../api/useQuery";
+// import useMutation from "../api/useMutation";
 import { professors } from "../data/DummyData";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,7 +10,7 @@ export default function SingleFaculty() {
   //Grab the id from the URL parameters, then find and compare the prof id to the id from params
   const { id } = useParams();
   const prof = professors.find((p) => p.id === parseInt(id));
-
+/* 
   const {
     data: professor,
     loading,
@@ -31,7 +31,7 @@ export default function SingleFaculty() {
       console.error("Deletion failed", err);
     }
   };
-
+*/
   if (!prof) return <p className="text-center mt-4">Professor not found</p>;
     return (
         <div className="container mt-5">
