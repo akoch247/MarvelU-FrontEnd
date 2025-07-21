@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { departments, professors } from "../data/DummyData";
-import "./departments.css";
 import { div } from "framer-motion/client";
 
 export default function SingleDepartment() {
@@ -26,7 +25,6 @@ export default function SingleDepartment() {
                         <img src={prof.profile_img} alt={`${prof.name}'s picture`} />
                         <h3>{prof.name}</h3>
                         <p><strong>Email:</strong> {prof.email}</p>
-                        <p><strong>Superpower:</strong> {prof.superpower}</p>
                         <p><strong>Date of Hire:</strong> {prof.dateOfHire}</p>
                         <p><strong>Department:</strong> {department.name}</p>
                     </div>

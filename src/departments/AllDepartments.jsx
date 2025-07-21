@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {departments as dummyDepartments} from "../data/DummyData";
-import "./departments.css";
 import { div, p } from "framer-motion/client";
 import { Link } from "react-router-dom";
 
