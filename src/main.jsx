@@ -10,12 +10,10 @@ import { ApiProvider } from "./api/ApiContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <ApiProvider>
-          <App />
-        </ApiProvider>
-      </AuthProvider>
-    </BrowserRouter>
+    <AuthProvider>
+      <ApiProvider>
+        <App />
+      </ApiProvider>
+    </AuthProvider>
   </StrictMode>
 );
