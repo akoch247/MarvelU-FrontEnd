@@ -45,7 +45,6 @@ export default function SingleFaculty() {
             />
             <h2>{prof.name}</h2>
             <p>Department: {prof.department}</p>
-            <p>Superpower: {prof.superpower}</p>
             <p>Date of Hire: {prof.dateOfHire}</p>
             <p>Email: <a href={`mailto:${prof.email}`}>{prof.email}</a></p>
             <button className="btn btn-danger mt-3">Delete Professor</button>
@@ -84,16 +83,6 @@ export default function SingleFaculty() {
                   id="department"
                   placeholder="Engineering"
                   defaultValue={prof.department}
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="superpower" className="form-label small">Superpower</label>
-                <input 
-                  type="text"
-                  className="form-control form-control-sm"
-                  id="superpower"
-                  placeholder="strength"
-                  defaultValue={prof.superpower}
                 />
               </div>
               <div className="mb-2">

@@ -14,7 +14,6 @@ export default function AllFaculty() {
     email: "",
     profile_img: "",
     department: "",
-    superpower: "",
     dateOfHire: "",
   });
 
@@ -40,7 +39,6 @@ export default function AllFaculty() {
         email: "",
         profile_img: "",
         department: "",
-        superpower: "",
         dateOfHire: "",
       });    
     };
@@ -78,7 +76,6 @@ export default function AllFaculty() {
               { label: "Email", name: "email" },
               { label: "Profile Image URL", name: "profile_img" },
               { label: "Department", name: "department" },
-              { label: "Superpower", name: "superpower" },
               { label: "Date of Hire", name: "dateOfHire", type: "date" },
             ].map((field) => (
               <div className="col-md-6" key={field.name}>
