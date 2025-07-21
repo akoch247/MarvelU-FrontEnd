@@ -6,6 +6,7 @@ import Error404 from "./Error404.jsx";
 import Navbar from "./layout/Navbar.jsx";
 import FacultyPage from "./faculty/FacultyPage.jsx";
 import SingleFaculty from "./faculty/SingleFaculty.jsx";
+import DepartmentsPage from "./departments/DepartmentsPage.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Login />} />
           <Route path="/faculty" element={<FacultyPage />} />
+          <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="faculty/:id" element={<SingleFaculty />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
