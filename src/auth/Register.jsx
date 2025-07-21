@@ -22,21 +22,41 @@ export default function Register() {
   };
 
   return (
-    <>
-      <h1>Register for an account</h1>
-      <form action={tryRegister}>
-        <label>
-          Username
-          <input type="text" name="username" required />
-        </label>
-        <label>
-          Password
-          <input type="password" name="password" required />
-        </label>
-        <button>Register</button>
-        {error && <output>{error}</output>}
-      </form>
-      <Link to="/login">Already have an account? Log in here.</Link>
-    </>
+    <div className="container d-flex justify-content-center align-items-center vh-100 bg-light">
+        <form
+            className="w-100 p-5 rounded bg-white border"
+            style={{ maxWidth: "350px", fontSize: "0.9rem" }}
+            action={{tryRegister}}
+        >
+            <h5 className="mb-3 text-center">Register For An Account</h5>
+            <input
+                type="text"
+                name="username"
+                className="form-control form-control-sm mb-5"
+                placeholder="Username"
+                required
+            />
+            <input
+                type="password"
+                name="password"
+                className="form-control form-control-sm mb-5"
+                placeholder="Password"
+                required
+            />
+            {error && (
+                <div className="text-danger text-center small mb-5">
+                    {error}
+                </div>
+            )}
+            <button type="submit" className="btn btn-dark w-100 mb-5">
+                Register
+            </button>
+            <div className="text-center">
+                <Link to="/login" className="text-muted small">
+                    Already have an account? Log in here
+                </Link>
+            </div>
+        </form>
+    </div>
   );
-}
+}    
