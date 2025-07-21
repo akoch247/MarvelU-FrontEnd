@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import useQuery from "../api/useQuery";
 // import useMutation from "../api/useMutation";
-import { professors } from "../data/DummyData";
+import { professors as dummyProfessors } from "../data/DummyData";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -9,6 +9,7 @@ export default function SingleFaculty() {
 
   //Grab the id from the URL parameters, then find and compare the prof id to the id from params
   const { id } = useParams();
+  const [professors] = useState(dummyProfessors);
   const prof = professors.find((p) => p.id === parseInt(id));
 /* 
   const {
@@ -48,6 +49,76 @@ export default function SingleFaculty() {
             <p>Date of Hire: {prof.dateOfHire}</p>
             <p>Email: <a href={`mailto:${prof.email}`}>{prof.email}</a></p>
             <button className="btn btn-danger mt-3">Delete Professor</button>
+          </div>
+
+          {/* Change any info */}
+          <div className="border p-3 shadow rounded bg-light mx-auto"
+            style={{ maxWidth: "350px", fontSize: "0.9rem" }}>
+            <h5 className="mb-3 text-center">Edit Professor Information</h5>
+            <form>
+              <div className="mb-2">
+                <label htmlFor="name" className="form-label small">Full Name</label>
+                <input 
+                  type="text"
+                  className="form-control form-control-sm"
+                  id="name"
+                  placeholder="Professor Name"
+                  defaultValue={prof.name}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="email" className="form-label small">Email Address</label>
+                <input 
+                  type="email"
+                  className="form-control form-control-sm"
+                  id="email"
+                  placeholder="email@example.edu"
+                  defaultValue={prof.email}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="department" className="form-label small">Department</label>
+                <input 
+                  type="text"
+                  className="form-control form-control-sm"
+                  id="department"
+                  placeholder="Engineering"
+                  defaultValue={prof.department}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="superpower" className="form-label small">Superpower</label>
+                <input 
+                  type="text"
+                  className="form-control form-control-sm"
+                  id="superpower"
+                  placeholder="strength"
+                  defaultValue={prof.superpower}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="dateOfHire" className="form-label small">Date of Hire</label>
+                <input 
+                  type="date"
+                  className="form-control form-control-sm"
+                  id="dateOfHire"
+                  defaultValue={prof.dateOfHire}
+                />
+              </div>
+              <div className="mb-2">
+                <label htmlFor="profile_img" className="form-label small">Profile Image URL</label>
+                <input 
+                  type="text"
+                  className="form-control form-control-sm"
+                  id="profile_img"
+                  placeholder="https://example.com/image.jpg"
+                  defaultValue={prof.profile_img}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary btn-sm w-100">
+                Save Changes
+              </button>
+            </form>
           </div>
         </div>
     );

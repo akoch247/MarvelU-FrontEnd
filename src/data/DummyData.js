@@ -59,7 +59,7 @@ export const professors = [
         superpower: "health regeneration",
         dateOfHire:  "02-02-2011",
         email: "Deadpool@marvelu.edu",
-        profile_img: "/deadpool.png",
+        profile_img: "/deadpool.jpg",
         department_id: 1,
     },
     {
@@ -139,7 +139,7 @@ export const professors = [
         superpower: "strength, speed, agility",
         dateOfHire:  "10-1-2016",
         email: "CaptainAmerica@marvelu.edu",
-        profile_img: "/captain.png",
+        profile_img: "/captain.webp",
         department_id: 4,
     },
     {
