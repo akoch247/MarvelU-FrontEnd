@@ -8,25 +8,25 @@ export const departments = [
     {
         id: 2,
         name: "Engineering",
-        banner_img: "engineering.jpg",
+        banner_img: "/engineering.jpg",
         faculty: [5, 6, 7],
     },
     {
         id: 3,
         name: "AstroPhysics",
-        banner_img: "astrophysics.jpg",
+        banner_img: "/astrophysics.jpg",
         faculty: [8, 9, 10],
     },
     {
         id: 4,
         name: "Admin",
-        banner_img: "admin.webp",
+        banner_img: "/admin.webp",
         faculty: [11, 12, 13],
     },
     {
         id: 5,
         name: "Athletic",
-        banner_img: "athletic.png",
+        banner_img: "/athletic.png",
         faculty: [14, 15, 16],
     }
 ];

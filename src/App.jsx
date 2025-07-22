@@ -7,9 +7,9 @@ import Navbar from "./layout/Navbar.jsx";
 import FacultyPage from "./faculty/FacultyPage.jsx";
 import SingleFaculty from "./faculty/SingleFaculty.jsx";
 import DepartmentsPage from "./departments/DepartmentsPage.jsx";
-import SingleDepartment from "./departments/SingleDepartment.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import SingleDepartment from "./departments/SingleDepartment.jsx";
 
 function Layout() {
   return (
@@ -30,11 +30,8 @@ export default function App() {
           <Route index element={<Login />} />
           <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
-          <Route
-            path="/departments/:departmentId"
-            element={<SingleDepartment />}
-          />
           <Route path="faculty/:id" element={<SingleFaculty />} />
+          <Route path="departments/:id" element={<SingleDepartment />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<Error404 />} />
