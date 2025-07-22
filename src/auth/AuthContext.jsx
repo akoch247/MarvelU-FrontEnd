@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import { API } from "../api/ApiContext"; // ✅ FIX: Removed trailing slash
+import { API } from "../api/ApiContext";
 
 const AuthContext = createContext();
 
@@ -14,14 +14,10 @@ export function AuthProvider({ children }) {
       body: JSON.stringify(credentials),
     });
 
-    // ✅ FIX: Read the response as plain text
     const result = await response.text();
-
     if (!response.ok) {
       throw new Error(result);
     }
-
-    // ✅ FIX: The result itself is the token
     setToken(result);
   };
 
@@ -32,14 +28,12 @@ export function AuthProvider({ children }) {
       body: JSON.stringify(credentials),
     });
 
-    // ✅ FIX: Read the response as plain text
     const result = await response.text();
 
     if (!response.ok) {
       throw new Error(result);
     }
 
-    // ✅ FIX: The result itself is the token
     setToken(result);
   };
 
