@@ -24,7 +24,9 @@ export default function Register() {
   };
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+    <div
+      style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}
+    >
       <Particles
         particleColors={["#ffffff", "#ffffff"]}
         particleCount={200}
@@ -62,18 +64,28 @@ export default function Register() {
           <h5 className="mb-3 text-center" style={{ color: "white" }}>
             Register For An Account
           </h5>
-          <label htmlFor="username" style={{ color: "white", fontSize: "0.9rem" }}>
-            Username
+          <label
+            htmlFor="username"
+            style={{ color: "white", fontSize: "0.9rem" }}
+          >
+            Email
           </label>
           <input
-            type="text"
-            name="username"
+            type="email"
+            name="email"
             className="form-control form-control-sm mb-4"
-            placeholder="Username"
+            placeholder="Email"
             required
-            style={{ backgroundColor: "#222", color: "white", borderColor: "#555" }}
+            style={{
+              backgroundColor: "#222",
+              color: "white",
+              borderColor: "#555",
+            }}
           />
-          <label htmlFor="password" style={{ color: "white", fontSize: "0.9rem" }}>
+          <label
+            htmlFor="password"
+            style={{ color: "white", fontSize: "0.9rem" }}
+          >
             Password
           </label>
           <input
@@ -82,7 +94,11 @@ export default function Register() {
             className="form-control form-control-sm mb-4"
             placeholder="Password"
             required
-            style={{ backgroundColor: "#222", color: "white", borderColor: "#555" }}
+            style={{
+              backgroundColor: "#222",
+              color: "white",
+              borderColor: "#555",
+            }}
           />
           {error && (
             <div className="text-danger text-center small mb-4">{error}</div>

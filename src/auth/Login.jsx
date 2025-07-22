@@ -24,7 +24,13 @@ export default function Login() {
   };
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#000" }}>
+    <div
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        backgroundColor: "#000",
+      }}
+    >
       <Particles
         particleColors={["#ffffff", "#cccccc"]}
         particleCount={150}
@@ -61,13 +67,13 @@ export default function Login() {
           <h5 className="mb-3 text-center text-white">Login</h5>
 
           <label htmlFor="username" style={{ color: "white" }}>
-            Username
+            Email
           </label>
           <input
-            type="text"
-            name="username"
+            type="email"
+            name="email"
             className="form-control form-control-sm mb-4"
-            placeholder="Username"
+            placeholder="Email"
             required
             style={{
               backgroundColor: "#1a1a1a",
