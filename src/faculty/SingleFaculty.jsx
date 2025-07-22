@@ -64,10 +64,7 @@ export default function SingleFaculty() {
     <div
       style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}
     >
-      <Particles
-        particleColors={["#ffffff", "#ffffff"]}
-        // ... your other particle props
-      />
+      <Particles particleColors={["#ffffff", "#ffffff"]} />
       <div style={{ position: "relative", zIndex: 1, color: "white" }}>
         <div className="container py-5">
           <div className="text-center mb-5">
@@ -108,7 +105,6 @@ export default function SingleFaculty() {
             >
               <h5 className="mb-4 text-center">Edit Professor Information</h5>
               <form onSubmit={handleUpdate}>
-                {/* ... your form inputs can remain as they were ... */}
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label small">
                     Full Name
@@ -155,7 +151,6 @@ export default function SingleFaculty() {
                   Save Changes
                 </button>
               </form>{" "}
-              {/* ✅ FIX: Added angle brackets to close the form tag */}
             </div>
           )}
         </div>
