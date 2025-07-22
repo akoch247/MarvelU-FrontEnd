@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import {departments as dummyDepartments} from "../data/DummyData";
+import {
+  departments as dummyDepartments,
+  professors as dummyProfessors,
+} from "../data/DummyData";
 import { div, p } from "framer-motion/client";
 import { Link } from "react-router-dom";
 
 export function AllDepartments() {
-  const [departments, setDepartmens] = useState(dummyDepartments);
+  const [departments, setDepartments] = useState(dummyDepartments);
+  const [professors, setProfessors] = useState(dummyProfessors);
   const [newDept, setNewDept] = useState({
     name: "",
     description: "",
@@ -18,13 +22,13 @@ export function AllDepartments() {
     e.preventDefault();
     const newEntry = {
       ...newDept,
-      id: departments.length ? departments[departments.length - 1].id + 1 : 1, 
+      id: departments.length ? departments[departments.length - 1].id + 1 : 1,
     };
-    setDepartmens([...departments, newEntry]);
+    setDepartments([...departments, newEntry]);
     setNewDept({ name: "", description: "" });
   };
 
-  return(
+  return (
     <div>
       <div>
         {departments.map((dept) => {
@@ -56,7 +60,6 @@ export function AllDepartments() {
         })}
       </div>
 
-
       <div>
         <h2>Add a New Department</h2>
         <form onSubmit={handleSubmit}>
@@ -66,12 +69,12 @@ export function AllDepartments() {
           ].map((field) => (
             <div key={field.name}>
               <label>{field.label}</label>
-              <input 
-              type="text"
-              name={field.name}
-              value={newDept[field.name]}
-              onChange={handleChange}
-              required
+              <input
+                type="text"
+                name={field.name}
+                value={newDept[field.name]}
+                onChange={handleChange}
+                required
               />
             </div>
           ))}
