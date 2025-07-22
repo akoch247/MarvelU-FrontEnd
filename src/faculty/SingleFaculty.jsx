@@ -1,43 +1,36 @@
 import React, { useState } from "react";
-// import useQuery from "../api/useQuery";
-// import useMutation from "../api/useMutation";
-import { professors as dummyProfessors } from "../data/DummyData";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Particles from "../particles/Particles";
+import { professors as dummyProfessors } from "../data/DummyData";
 
 export default function SingleFaculty() {
-
-  //Grab the id from the URL parameters, then find and compare the prof id to the id from params
   const { id } = useParams();
   const [professors] = useState(dummyProfessors);
   const prof = professors.find((p) => p.id === parseInt(id));
-/* 
-  const {
-    data: professor,
-    loading,
-    error,
-  } = useQuery(`/faculty/${id}`, ["faculty", id]);
 
-  const {
-    mutate: deleteProfessor,
-    loading: deleteloading,
-    error: deleteError,
-  } = useMutation("DELETE", `/faculty/${id}`, ["faculty"]);
-
-  const handleDelete = async () => {
-    try {
-      await deleteProfessor();
-      navigate("/faculty");
-    } catch (err) {
-      console.error("Deletion failed", err);
-    }
-  };
-*/
   if (!prof) return <p className="text-center mt-4">Professor not found</p>;
-    return (
+
+  return (
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+      {/* Particles background */}
+      <Particles
+        particleColors={["#ffffff", "#ffffff"]}
+        particleCount={200}
+        particleSpread={10}
+        speed={0.1}
+        particleBaseSize={100}
+        moveParticlesOnHover={true}
+        alphaParticles={false}
+        disableRotation={false}
+        className="particles-background"
+      />
+
+      {/* Foreground content */}
+      <div style={{ position: "relative", zIndex: 1, color: "white" }}>
         <div className="container mt-5">
           <div className="text-center">
-            <img 
+            <img
               src={prof.profile_img}
               alt="Profile picture"
               className="rounded-circle mb-3"
@@ -46,18 +39,23 @@ export default function SingleFaculty() {
             <h2>{prof.name}</h2>
             <p>Department: {prof.department}</p>
             <p>Date of Hire: {prof.dateOfHire}</p>
-            <p>Email: <a href={`mailto:${prof.email}`}>{prof.email}</a></p>
+            <p>
+              Email: <a href={`mailto:${prof.email}`}>{prof.email}</a>
+            </p>
             <button className="btn btn-danger mt-3">Delete Professor</button>
           </div>
 
-          {/* Change any info */}
-          <div className="border p-3 shadow rounded bg-light mx-auto"
-            style={{ maxWidth: "350px", fontSize: "0.9rem" }}>
-            <h5 className="mb-3 text-center">Edit Professor Information</h5>
+          <div
+            className="border p-3 shadow rounded bg-light mx-auto"
+            style={{ maxWidth: "350px", fontSize: "0.9rem", color: "black"}}
+          >
+            <h5 className="mb-3 text-center" style={{color:"black"}}>Edit Professor Information</h5>
             <form>
               <div className="mb-2">
-                <label htmlFor="name" className="form-label small">Full Name</label>
-                <input 
+                <label htmlFor="name" className="form-label small">
+                  Full Name
+                </label>
+                <input
                   type="text"
                   className="form-control form-control-sm"
                   id="name"
@@ -66,8 +64,10 @@ export default function SingleFaculty() {
                 />
               </div>
               <div className="mb-2">
-                <label htmlFor="email" className="form-label small">Email Address</label>
-                <input 
+                <label htmlFor="email" className="form-label small">
+                  Email Address
+                </label>
+                <input
                   type="email"
                   className="form-control form-control-sm"
                   id="email"
@@ -76,8 +76,10 @@ export default function SingleFaculty() {
                 />
               </div>
               <div className="mb-2">
-                <label htmlFor="department" className="form-label small">Department</label>
-                <input 
+                <label htmlFor="department" className="form-label small">
+                  Department
+                </label>
+                <input
                   type="text"
                   className="form-control form-control-sm"
                   id="department"
@@ -86,8 +88,10 @@ export default function SingleFaculty() {
                 />
               </div>
               <div className="mb-2">
-                <label htmlFor="dateOfHire" className="form-label small">Date of Hire</label>
-                <input 
+                <label htmlFor="dateOfHire" className="form-label small">
+                  Date of Hire
+                </label>
+                <input
                   type="date"
                   className="form-control form-control-sm"
                   id="dateOfHire"
@@ -95,8 +99,10 @@ export default function SingleFaculty() {
                 />
               </div>
               <div className="mb-2">
-                <label htmlFor="profile_img" className="form-label small">Profile Image URL</label>
-                <input 
+                <label htmlFor="profile_img" className="form-label small">
+                  Profile Image URL
+                </label>
+                <input
                   type="text"
                   className="form-control form-control-sm"
                   id="profile_img"
@@ -110,5 +116,7 @@ export default function SingleFaculty() {
             </form>
           </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }

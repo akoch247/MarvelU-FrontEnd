@@ -49,7 +49,7 @@ export default function AllFaculty() {
           <div className="row justify-content-center">
             {facultyList.map((prof) => (
               <div key={prof.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
-                <div className="border rounded p-3 text-center h-100">
+                <div className=" shadow-sm rounded p-3 text-center h-100" style={{ backgroundColor: "#1e1e1e" }}>
                   <img
                     src={prof.profile_img}
                     alt={prof.name}
@@ -57,18 +57,18 @@ export default function AllFaculty() {
                     style={{ width: "100px", height: "100px", objectFit: "cover" }}
                   />
                   <h5 className="mb-1">
-                    <Link to={`/faculty/${prof.id}`} className="text-decoration-none text-dark">
+                    <Link to={`/faculty/${prof.id}`} className="text-decoration-none text-white">
                       {prof.name}
                       </Link>
                   </h5>
-                <p className="text-muted small">{prof.email}</p>
+                <p className="text-light small">{prof.email}</p>
               </div>
             </div>
             ))}
         </div>
 
         {/*Add a professor here */}
-        <div className="mt-5">
+        <div className="mt-5 text-white">
           <h2 className="mb-3">Add a New Professor</h2>
           <form onSubmit={handleSubmit} className="row g-3">
             {[
