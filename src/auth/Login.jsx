@@ -53,14 +53,14 @@ export default function Login() {
         }}
       >
         <form
-          className="w-100 rounded border"
+          className="w-100 rounded "
           style={{
             maxWidth: "350px",
             padding: "2rem",
-            backgroundColor: "rgba(0, 0, 0, 0.75)",
-            color: "white",
+            //backgroundColor: "rgba(0, 0, 0, 0.75)",
+           // color: "black",
             boxShadow: "0 0 15px rgba(255,255,255,0.1)",
-            fontSize: "0.9rem",
+            fontSize: "1rem",
           }}
           onSubmit={handleSubmit}
         >
@@ -93,7 +93,7 @@ export default function Login() {
             placeholder="Password"
             required
             style={{
-              backgroundColor: "#1a1a1a",
+              backgroundColor: "#1e1e1e",
               color: "white",
               borderColor: "#444",
               fontSize: "0.9rem",
@@ -104,7 +104,7 @@ export default function Login() {
             <div className="text-danger text-center small mb-3">{error}</div>
           )}
 
-          <button type="submit" className="btn btn-light w-100 mb-3">
+          <button type="submit" className="btn btn-dark w-100 mb-3">
             Sign In
           </button>
 
