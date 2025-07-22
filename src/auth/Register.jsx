@@ -8,19 +8,19 @@ export default function Register() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const tryRegister = async (credentials) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    const formData = new FormData(e.target);
+    const credentials = Object.fromEntries(formData);
+
     try {
       await register(credentials);
-      navigate("/activities");
-    } catch (e) {
-      setError(e.message);
+      navigate("/faculty");
+    } catch (err) {
+      setError(err.message);
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    tryRegister(formData);
   };
 
   return (
