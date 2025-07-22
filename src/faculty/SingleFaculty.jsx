@@ -59,15 +59,15 @@ export default function SingleFaculty() {
     <div className="container mt-5">
       <div className="text-center">
         <img
-          src={professor.profile_img}
-          alt="Profile picture"
+          src={professor.profile_image_url}
+          alt={professor.name}
           className="rounded-circle mb-3"
           style={{ width: "120px", height: "120px", objectFit: "cover" }}
         />
         <h2>{professor.name}</h2>
-        <p>Department: {professor.department}</p>
+        <p>Department: {professor.department_name}</p>
         <p>
-          Date of Hire: {new Date(professor.dateOfHire).toLocaleDateString()}
+          Date of Hire: {new Date(professor.date_of_hire).toLocaleDateString()}
         </p>
         <p>
           Email: <a href={`mailto:${professor.email}`}>{professor.email}</a>
@@ -92,7 +92,7 @@ export default function SingleFaculty() {
               className="form-control form-control-sm"
               id="name"
               name="name"
-              value={formData.name}
+              value={formData.name || ""}
               onChange={handleChange}
             />
           </div>
@@ -105,46 +105,46 @@ export default function SingleFaculty() {
               className="form-control form-control-sm"
               id="email"
               name="email"
-              value={formData.email}
+              value={formData.email || ""}
               onChange={handleChange}
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="department" className="form-label small">
+            <label htmlFor="department_name" className="form-label small">
               Department
             </label>
             <input
               type="text"
               className="form-control form-control-sm"
-              id="department"
-              name="department"
-              value={formData.department}
+              id="department_name"
+              name="department_name"
+              value={formData.department_name || ""}
               onChange={handleChange}
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="dateOfHire" className="form-label small">
+            <label htmlFor="date_of_hire" className="form-label small">
               Date of Hire
             </label>
             <input
               type="date"
               className="form-control form-control-sm"
-              id="dateOfHire"
-              name="dateOfHire"
-              value={formData.dateOfHire?.split("T")[0]}
+              id="date_of_hire"
+              name="date_of_hire"
+              value={formData.date_of_hire?.split("T")[0] || ""}
               onChange={handleChange}
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="profile_img" className="form-label small">
+            <label htmlFor="profile_image_url" className="form-label small">
               Profile Image URL
             </label>
             <input
               type="text"
               className="form-control form-control-sm"
-              id="profile_img"
-              name="profile_img"
-              value={formData.profile_img}
+              id="profile_image_url"
+              name="profile_image_url"
+              value={formData.profile_image_url || ""}
               onChange={handleChange}
             />
           </div>

@@ -10,9 +10,9 @@ export default function AllFaculty() {
   const [newProfessor, setNewProfessor] = useState({
     name: "",
     email: "",
-    profile_img: "",
+    profile_image_url: "",
     department: "",
-    dateOfHire: "",
+    date_of_hire: "",
   });
 
   useEffect(() => {
@@ -42,9 +42,9 @@ export default function AllFaculty() {
       setNewProfessor({
         name: "",
         email: "",
-        profile_img: "",
+        profile_image_url: "",
         department: "",
-        dateOfHire: "",
+        date_of_hire: "",
       });
     } catch (err) {
       setError(err.message);
@@ -59,7 +59,7 @@ export default function AllFaculty() {
           <div key={prof.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <div className="border rounded p-3 text-center h-100">
               <img
-                src={prof.profile_img}
+                src={prof.profile_image_url}
                 alt={prof.name}
                 className="rounded-circle mb-3"
                 style={{ width: "100px", height: "100px", objectFit: "cover" }}
@@ -84,9 +84,9 @@ export default function AllFaculty() {
           {[
             { label: "Name", name: "name" },
             { label: "Email", name: "email" },
-            { label: "Profile Image URL", name: "profile_img" },
-            { label: "Department", name: "department" },
-            { label: "Date of Hire", name: "dateOfHire", type: "date" },
+            { label: "Profile Image URL", name: "profile_image_url" },
+            { label: "Department ID", name: "department_id", type: "number" },
+            { label: "Date of Hire", name: "date_of_hire", type: "date" },
           ].map((field) => (
             <div className="col-md-6" key={field.name}>
               <label className="form-label">{field.label}</label>
