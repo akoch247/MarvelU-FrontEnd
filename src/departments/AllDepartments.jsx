@@ -38,7 +38,7 @@ export function AllDepartments() {
   };
 
   return (
-    <div className="container py-4">
+    <div className="py-4" style={{ maxWidth: "800px", margin: "0 auto" }}>
       <div className="row justify-content-center">
         {departments.map((dept) => {
           const deptProfessors = professors.filter(
@@ -53,32 +53,39 @@ export function AllDepartments() {
               <h3>
                 <Link
                   to={`/departments/${dept.id}`}
-                  className="text-decoration-none text-dark"
+                  className="text-decoration-none text-white"
                 >
                   {dept.name}
                 </Link>
               </h3>
 
-              <p>{dept.description}</p>
               {deptProfessors.length > 0 ? (
-                deptProfessors.map((prof) => (
-                  <div key={prof.id}>
-                    <img
-                      src={prof.profile_img}
-                      alt={prof.name}
-                      className="rounded-circle mb-3"
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <p>{prof.name}</p>
-                    <p>{prof.email}</p>
-                  </div>
-                ))
+                <div className="d-flex flex-wrap gap-3">
+                  {deptProfessors.map((prof) => (
+                    <div
+                      key={prof.id}
+                      className="d-flex flex-column align-items"
+                      style={{ width: "150px" }}
+                    >
+                      <img
+                        src={prof.profile_img}
+                        alt={prof.name}
+                        className="rounded-circle m-2"
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                      />
+                      <p>
+                        <strong>{prof.name}</strong>
+                      </p>
+                      <p>{prof.email}</p>
+                    </div>
+                  ))}
+                </div>
               ) : (
-                <p>No professors yet in this department.</p>
+                <p>No professors yet in this department</p>
               )}
 
               <button
@@ -97,7 +104,7 @@ export function AllDepartments() {
         <form onSubmit={handleSubmit} className="row g-3">
           {[
             { label: "Department Name", name: "name" },
-            { label: "Desccription", name: "description" },
+            { label: "Banner Image URL", name: "banner_img" },
           ].map((field) => (
             <div key={field.name} className="col-md-6">
               <label className="form-label">{field.label}</label>

@@ -1,5 +1,6 @@
 import React from "react";
 import { AllDepartments } from "./AllDepartments";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function DepartmentsPage() {
   return (
