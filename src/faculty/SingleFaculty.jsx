@@ -9,11 +9,11 @@ export default function SingleFaculty() {
   const [professors] = useState(dummyProfessors);
   const prof = professors.find((p) => p.id === parseInt(id));
 
-  if (!prof) return <p className="text-center mt-4">Professor not found</p>;
+  if (!prof) return <p className="text-center mt-4 text-white">Professor not found</p>;
 
   return (
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Particles background */}
+      {/* Particle Background */}
       <Particles
         particleColors={["#ffffff", "#ffffff"]}
         particleCount={200}
@@ -23,16 +23,15 @@ export default function SingleFaculty() {
         moveParticlesOnHover={true}
         alphaParticles={false}
         disableRotation={false}
-        className="particles-background"
       />
 
-      {/* Foreground content */}
+      {/* Foreground Content */}
       <div style={{ position: "relative", zIndex: 1, color: "white" }}>
-        <div className="container mt-5">
-          <div className="text-center">
+        <div className="container py-5">
+          <div className="text-center mb-5">
             <img
               src={prof.profile_img}
-              alt="Profile picture"
+              alt="Profile"
               className="rounded-circle mb-3"
               style={{ width: "120px", height: "120px", objectFit: "cover" }}
             />
@@ -40,79 +39,36 @@ export default function SingleFaculty() {
             <p>Department: {prof.department}</p>
             <p>Date of Hire: {prof.dateOfHire}</p>
             <p>
-              Email: <a href={`mailto:${prof.email}`}>{prof.email}</a>
+              Email: <a href={`mailto:${prof.email}`} className="text-white">{prof.email}</a>
             </p>
             <button className="btn btn-danger mt-3">Delete Professor</button>
           </div>
 
           <div
-            className="border p-3 shadow rounded bg-light mx-auto"
-            style={{ maxWidth: "350px", fontSize: "0.9rem", color: "black"}}
+            className="border p-4 shadow rounded bg-light mx-auto"
+            style={{ maxWidth: "400px", color: "black" }}
           >
-            <h5 className="mb-3 text-center" style={{color:"black"}}>Edit Professor Information</h5>
+            <h5 className="mb-4 text-center">Edit Professor Information</h5>
             <form>
-              <div className="mb-2">
-                <label htmlFor="name" className="form-label small">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  id="name"
-                  placeholder="Professor Name"
-                  defaultValue={prof.name}
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="email" className="form-label small">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  className="form-control form-control-sm"
-                  id="email"
-                  placeholder="email@example.edu"
-                  defaultValue={prof.email}
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="department" className="form-label small">
-                  Department
-                </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  id="department"
-                  placeholder="Engineering"
-                  defaultValue={prof.department}
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="dateOfHire" className="form-label small">
-                  Date of Hire
-                </label>
-                <input
-                  type="date"
-                  className="form-control form-control-sm"
-                  id="dateOfHire"
-                  defaultValue={prof.dateOfHire}
-                />
-              </div>
-              <div className="mb-2">
-                <label htmlFor="profile_img" className="form-label small">
-                  Profile Image URL
-                </label>
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  id="profile_img"
-                  placeholder="https://example.com/image.jpg"
-                  defaultValue={prof.profile_img}
-                />
-              </div>
-              <button type="submit" className="btn btn-primary btn-sm w-100">
-                Save Changes
-              </button>
+              {[
+                { id: "name", label: "Full Name", type: "text", value: prof.name },
+                { id: "email", label: "Email Address", type: "email", value: prof.email },
+                { id: "department", label: "Department", type: "text", value: prof.department },
+                { id: "dateOfHire", label: "Date of Hire", type: "date", value: prof.dateOfHire },
+                { id: "profile_img", label: "Profile Image URL", type: "text", value: prof.profile_img },
+              ].map(({ id, label, type, value }) => (
+                <div className="mb-3" key={id}>
+                  <label htmlFor={id} className="form-label small">{label}</label>
+                  <input
+                    type={type}
+                    className="form-control form-control-sm"
+                    id={id}
+                    defaultValue={value}
+                    placeholder={type === "date" ? "" : label}
+                  />
+                </div>
+              ))}
+              <button type="submit" className="btn btn-primary btn-sm w-100">Save Changes</button>
             </form>
           </div>
         </div>

@@ -6,14 +6,11 @@ import Particles from "../particles/Particles";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-
   const [error, setError] = useState(null);
 
-  const tryLogin = async (formData) => {
-    const username = formData.get("username");
-    const password = formData.get("password");
+  const tryLogin = async (credentials) => {
     try {
-      await login({ username, password });
+      await login(credentials);
       navigate("/activities");
     } catch (e) {
       setError(e.message);
@@ -27,15 +24,15 @@ export default function Login() {
   };
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+    <div style={{ position: "relative", minHeight: "100vh", backgroundColor: "#000" }}>
       <Particles
-        particleColors={["#ffffff", "#ffffff"]}
-        particleCount={200}
-        particleSpread={10}
-        speed={0.1}
+        particleColors={["#ffffff", "#cccccc"]}
+        particleCount={150}
+        particleSpread={15}
+        speed={0.2}
         particleBaseSize={100}
         moveParticlesOnHover={true}
-        alphaParticles={false}
+        alphaParticles={true}
         disableRotation={false}
       />
 
@@ -54,17 +51,16 @@ export default function Login() {
           style={{
             maxWidth: "350px",
             padding: "2rem",
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
             color: "white",
-            boxShadow: "0 0 10px rgba(0,0,0,0.5)",
+            boxShadow: "0 0 15px rgba(255,255,255,0.1)",
             fontSize: "0.9rem",
           }}
           onSubmit={handleSubmit}
         >
-          <h5 className="mb-3 text-center" style={{ color: "white" }}>
-            Login
-          </h5>
-          <label htmlFor="username" style={{ color: "white", fontSize: "0.9rem" }}>
+          <h5 className="mb-3 text-center text-white">Login</h5>
+
+          <label htmlFor="username" style={{ color: "white" }}>
             Username
           </label>
           <input
@@ -73,9 +69,15 @@ export default function Login() {
             className="form-control form-control-sm mb-4"
             placeholder="Username"
             required
-            style={{ backgroundColor: "#222", color: "white", borderColor: "#555" }}
+            style={{
+              backgroundColor: "#1a1a1a",
+              color: "white",
+              borderColor: "#444",
+              fontSize: "0.9rem",
+            }}
           />
-          <label htmlFor="password" style={{ color: "white", fontSize: "0.9rem" }}>
+
+          <label htmlFor="password" style={{ color: "white" }}>
             Password
           </label>
           <input
@@ -84,16 +86,24 @@ export default function Login() {
             className="form-control form-control-sm mb-4"
             placeholder="Password"
             required
-            style={{ backgroundColor: "#222", color: "white", borderColor: "#555" }}
+            style={{
+              backgroundColor: "#1a1a1a",
+              color: "white",
+              borderColor: "#444",
+              fontSize: "0.9rem",
+            }}
           />
+
           {error && (
-            <div className="text-danger text-center small mb-4">{error}</div>
+            <div className="text-danger text-center small mb-3">{error}</div>
           )}
-          <button type="submit" className="btn btn-dark w-100 mb-4">
+
+          <button type="submit" className="btn btn-light w-100 mb-3">
             Sign In
           </button>
+
           <div className="text-center">
-            <Link to="/register" style={{ color: "#ccc", fontSize: "0.85rem" }}>
+            <Link to="/register" style={{ color: "#aaa", fontSize: "0.85rem" }}>
               Don't have an account? Register
             </Link>
           </div>
