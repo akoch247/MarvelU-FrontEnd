@@ -33,10 +33,10 @@ export default function Login() {
       >
         <h5 className="mb-3 text-center">Login</h5>
         <input
-          type="text"
-          name="username"
+          type="email"
+          name="usernemailame"
           className="form-control form-control-sm mb-5"
-          placeholder="Username"
+          placeholder="Email"
           required
         />
         <input
