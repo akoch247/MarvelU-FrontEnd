@@ -1,32 +1,51 @@
-import React, { useState } from "react";
-import {
-  departments as dummyDepartments,
-  professors as dummyProfessors,
-} from "../data/DummyData";
-import { div, p } from "framer-motion/client";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useApi } from "../api/ApiContext";
 
 export function AllDepartments() {
-  const [departments, setDepartments] = useState(dummyDepartments);
-  const [professors, setProfessors] = useState(dummyProfessors);
+  const [departments, setDepartments] = useState([]);
+  const [professors, setProfessors] = useState([]);
+  const [error, setError] = useState(null);
+  const { request } = useApi();
+
   const [newDept, setNewDept] = useState({
     name: "",
     description: "",
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const deptsData = await request("/departments");
+        const profsData = await request("/professors");
+        setDepartments(deptsData);
+        setProfessors(profsData);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchData();
+  }, [request]);
+
   const handleChange = (e) => {
     setNewDept({ ...newDept, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newEntry = {
-      ...newDept,
-      id: departments.length ? departments[departments.length - 1].id + 1 : 1,
-    };
-    setDepartments([...departments, newEntry]);
-    setNewDept({ name: "", description: "" });
+    try {
+      const createdDept = await request("/departments", {
+        method: "POST",
+        body: JSON.stringify(newDept),
+      });
+      setDepartments([...departments, createdDept]);
+      setNewDept({ name: "", description: "" });
+    } catch (err) {
+      setError(err.message);
+    }
   };
+
+  if (error) return <div className="alert alert-danger">{error}</div>;
 
   return (
     <div>
@@ -37,18 +56,25 @@ export function AllDepartments() {
           );
 
           return (
-            <div key={dept.id}>
+            <div key={dept.id} className="mb-4 p-3 border rounded">
               <h3>
-                <Link to={`/departments/${dept.id}`}>{dept.name}</Link>
+                <Link to={`/departments/${dept.id}`}>{dept.department}</Link>
               </h3>
-
               {deptProfessors.length > 0 ? (
-                <div>
+                <div className="d-flex flex-wrap">
                   {deptProfessors.map((prof) => (
-                    <div key={prof.id}>
-                      <img src={prof.profile_img} alt={prof.name} />
-                      <p>{prof.name}</p>
-                      <p>{prof.email}</p>
+                    <div key={prof.id} className="text-center me-3">
+                      <img
+                        src={prof.profile_image_url}
+                        alt={prof.name}
+                        className="rounded-circle"
+                        style={{
+                          width: "80px",
+                          height: "80px",
+                          objectFit: "cover",
+                        }}
+                      />
+                      <p className="small mt-1">{prof.name}</p>
                     </div>
                   ))}
                 </div>
@@ -60,26 +86,29 @@ export function AllDepartments() {
         })}
       </div>
 
-      <div>
+      <div className="mt-5">
         <h2>Add a New Department</h2>
         <form onSubmit={handleSubmit}>
           {[
-            { label: "Department Name", name: "name" },
-            { label: "Desccription", name: "description" },
+            { label: "Department Name", name: "department" },
+            { label: "Description", name: "description" },
           ].map((field) => (
-            <div key={field.name}>
-              <label>{field.label}</label>
+            <div key={field.name} className="mb-3">
+              <label className="form-label">{field.label}</label>
               <input
                 type="text"
                 name={field.name}
                 value={newDept[field.name]}
                 onChange={handleChange}
+                className="form-control"
                 required
               />
             </div>
           ))}
           <div>
-            <button type="submit">Add Department</button>
+            <button type="submit" className="btn btn-primary">
+              Add Department
+            </button>
           </div>
         </form>
       </div>
