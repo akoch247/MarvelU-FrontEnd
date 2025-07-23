@@ -61,7 +61,6 @@ export default function SingleFaculty() {
     return <p className="text-center mt-4 text-white">Loading...</p>;
 
   return (
-<<<<<<< HEAD
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
       {/* Particle Background */}
       <Particles
@@ -76,12 +75,6 @@ export default function SingleFaculty() {
       />
 
       {/* Foreground Content */}
-=======
-    <div
-      style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}
-    >
-      <Particles particleColors={["#ffffff", "#ffffff"]} />
->>>>>>> 08071557031d27c3cee536322eef22a29ee1cb18
       <div style={{ position: "relative", zIndex: 1, color: "white" }}>
         <div className="container py-5">
           <div className="text-center mb-5">
