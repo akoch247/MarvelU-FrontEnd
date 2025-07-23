@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useApi } from "../api/ApiContext"; // ✅ Added API context
-import { useAuth } from "../auth/AuthContext"; // ✅ Added Auth context
+import { useApi } from "../api/ApiContext";
+import { useAuth } from "../auth/AuthContext";
 
 export function AllDepartments() {
   const [departments, setDepartments] = useState([]);
@@ -11,14 +11,12 @@ export function AllDepartments() {
   const { token } = useAuth();
   const [refetch, setRefetch] = useState(false);
 
-  // ✅ State now matches the database columns
   const [newDept, setNewDept] = useState({
     department: "",
     banner_image_url: "",
     description: "",
   });
 
-  // ✅ Fetch real data from the backend
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,7 +35,6 @@ export function AllDepartments() {
     setNewDept({ ...newDept, [e.target.name]: e.target.value });
   };
 
-  // ✅ Make the form submission talk to the API
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -45,14 +42,13 @@ export function AllDepartments() {
         method: "POST",
         body: JSON.stringify(newDept),
       });
-      setRefetch((prev) => !prev); // Refetch data to show the new department
+      setRefetch((prev) => !prev);
       setNewDept({ department: "", banner_image_url: "", description: "" });
     } catch (err) {
       setError(err.message);
     }
   };
 
-  // ✅ Make the delete button talk to the API
   const handleDelete = async (id) => {
     if (
       window.confirm(
@@ -61,7 +57,7 @@ export function AllDepartments() {
     ) {
       try {
         await request(`/departments/${id}`, { method: "DELETE" });
-        setRefetch((prev) => !prev); // Refetch data to remove the department
+        setRefetch((prev) => !prev);
       } catch (err) {
         setError(err.message);
       }
@@ -102,7 +98,7 @@ export function AllDepartments() {
                       style={{ width: "150px" }}
                     >
                       <img
-                        src={prof.profile_image_url} // ✅ FIX: Use correct property name
+                        src={prof.profile_image_url}
                         alt={prof.name}
                         className="rounded-circle m-2"
                         style={{
@@ -121,7 +117,6 @@ export function AllDepartments() {
                 <p>No professors yet in this department</p>
               )}
 
-              {/* ✅ Only show Delete button if logged in */}
               {token && (
                 <button
                   onClick={() => handleDelete(dept.id)}
@@ -135,13 +130,11 @@ export function AllDepartments() {
         })}
       </div>
 
-      {/* ✅ Only show Add Department form if logged in */}
       {token && (
         <div className="mt-5 text-white">
           <h2 className="mb-3">Add a New Department</h2>
           <form onSubmit={handleSubmit} className="row g-3">
             {[
-              // ✅ FIX: Use correct property names from the database
               { label: "Department Name", name: "department" },
               { label: "Description", name: "description" },
               { label: "Banner Image URL", name: "banner_image_url" },

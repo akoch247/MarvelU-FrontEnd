@@ -87,7 +87,6 @@ export default function SingleDepartment() {
           className="img-fluid mb-3"
           style={{ maxWidth: "100%", height: "auto" }}
         />
-        {/* ✅ FIX: Added the description display */}
         <p className="lead text-white-50">{department.description}</p>
       </div>
 
