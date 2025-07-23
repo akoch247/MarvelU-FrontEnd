@@ -1,17 +1,67 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useApi } from "../api/ApiContext";
+import { useAuth } from "../auth/AuthContext";
 import Particles from "../particles/Particles";
-import { professors as dummyProfessors } from "../data/DummyData";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SingleFaculty() {
   const { id } = useParams();
-  const [professors] = useState(dummyProfessors);
-  const prof = professors.find((p) => p.id === parseInt(id));
+  const navigate = useNavigate();
+  const { request } = useApi();
+  const { token } = useAuth();
 
-  if (!prof) return <p className="text-center mt-4 text-white">Professor not found</p>;
+  const [professor, setProfessor] = useState(null);
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfessor = async () => {
+      try {
+        const data = await request(`/professors/${id}`);
+        setProfessor(data);
+        setFormData(data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchProfessor();
+  }, [id, request]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const updatedProfessor = await request(`/professors/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(formData),
+      });
+      setProfessor(updatedProfessor);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this professor?")) {
+      try {
+        await request(`/professors/${id}`, { method: "DELETE" });
+        navigate("/faculty");
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+  };
+
+  if (error) return <div className="alert alert-danger">{error}</div>;
+  if (!professor)
+    return <p className="text-center mt-4 text-white">Loading...</p>;
 
   return (
+<<<<<<< HEAD
     <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
       {/* Particle Background */}
       <Particles
@@ -26,51 +76,100 @@ export default function SingleFaculty() {
       />
 
       {/* Foreground Content */}
+=======
+    <div
+      style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}
+    >
+      <Particles particleColors={["#ffffff", "#ffffff"]} />
+>>>>>>> 08071557031d27c3cee536322eef22a29ee1cb18
       <div style={{ position: "relative", zIndex: 1, color: "white" }}>
         <div className="container py-5">
           <div className="text-center mb-5">
             <img
-              src={prof.profile_img}
-              alt="Profile"
+              src={professor.profile_image_url}
+              alt={professor.name}
               className="rounded-circle mb-3"
               style={{ width: "120px", height: "120px", objectFit: "cover" }}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "/placeholder.png";
+              }}
             />
-            <h2>{prof.name}</h2>
-            <p>Department: {prof.department}</p>
-            <p>Date of Hire: {prof.dateOfHire}</p>
+            <h2>{professor.name}</h2>
+            <p>Department: {professor.department_name}</p>
             <p>
-              Email: <a href={`mailto:${prof.email}`} className="text-white">{prof.email}</a>
+              Date of Hire:{" "}
+              {new Date(professor.date_of_hire).toLocaleDateString()}
             </p>
-            <button className="btn btn-danger mt-3">Delete Professor</button>
+            <p>
+              Email:{" "}
+              <a href={`mailto:${professor.email}`} className="text-white">
+                {professor.email}
+              </a>
+            </p>
+
+            {token && (
+              <button onClick={handleDelete} className="btn btn-danger mt-3">
+                Delete Professor
+              </button>
+            )}
           </div>
 
-          <div
-            className="border p-4 shadow rounded bg-light mx-auto"
-            style={{ maxWidth: "400px", color: "black" }}
-          >
-            <h5 className="mb-4 text-center">Edit Professor Information</h5>
-            <form>
-              {[
-                { id: "name", label: "Full Name", type: "text", value: prof.name },
-                { id: "email", label: "Email Address", type: "email", value: prof.email },
-                { id: "department", label: "Department", type: "text", value: prof.department },
-                { id: "dateOfHire", label: "Date of Hire", type: "date", value: prof.dateOfHire },
-                { id: "profile_img", label: "Profile Image URL", type: "text", value: prof.profile_img },
-              ].map(({ id, label, type, value }) => (
-                <div className="mb-3" key={id}>
-                  <label htmlFor={id} className="form-label small">{label}</label>
+          {token && (
+            <div
+              className="border p-4 shadow rounded bg-dark mx-auto"
+              style={{ maxWidth: "400px" }}
+            >
+              <h5 className="mb-4 text-center">Edit Professor Information</h5>
+              <form onSubmit={handleUpdate}>
+                <div className="mb-3">
+                  <label htmlFor="name" className="form-label small">
+                    Full Name
+                  </label>
                   <input
-                    type={type}
+                    type="text"
                     className="form-control form-control-sm"
-                    id={id}
-                    defaultValue={value}
-                    placeholder={type === "date" ? "" : label}
+                    id="name"
+                    name="name"
+                    value={formData.name || ""}
+                    onChange={handleChange}
                   />
                 </div>
-              ))}
-              <button type="submit" className="btn btn-primary btn-sm w-100">Save Changes</button>
-            </form>
-          </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label small">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control form-control-sm"
+                    id="email"
+                    name="email"
+                    value={formData.email || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-3">
+                  <label
+                    htmlFor="profile_image_url"
+                    className="form-label small"
+                  >
+                    Profile Image URL
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control form-control-sm"
+                    id="profile_image_url"
+                    name="profile_image_url"
+                    value={formData.profile_image_url || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary btn-sm w-100">
+                  Save Changes
+                </button>
+              </form>{" "}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -31,7 +31,10 @@ export default function App() {
           <Route path="/faculty" element={<FacultyPage />} />
           <Route path="/departments" element={<DepartmentsPage />} />
           <Route path="faculty/:id" element={<SingleFaculty />} />
-          <Route path="departments/:id" element={<SingleDepartment />} />
+          <Route
+            path="departments/:departmentId"
+            element={<SingleDepartment />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<Error404 />} />

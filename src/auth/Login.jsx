@@ -8,19 +8,19 @@ export default function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const tryLogin = async (credentials) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    const formData = new FormData(e.target);
+    const credentials = Object.fromEntries(formData);
+
     try {
       await login(credentials);
-      navigate("/activities");
-    } catch (e) {
-      setError(e.message);
+      navigate("/faculty");
+    } catch (err) {
+      setError(err.message);
     }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    tryLogin(formData);
   };
 
   return (
@@ -57,8 +57,6 @@ export default function Login() {
           style={{
             maxWidth: "350px",
             padding: "2rem",
-            //backgroundColor: "rgba(0, 0, 0, 0.75)",
-           // color: "black",
             boxShadow: "0 0 15px rgba(255,255,255,0.1)",
             fontSize: "1rem",
           }}
@@ -66,7 +64,7 @@ export default function Login() {
         >
           <h5 className="mb-3 text-center text-white">Login</h5>
 
-          <label htmlFor="username" style={{ color: "white" }}>
+          <label htmlFor="email" style={{ color: "white" }}>
             Email
           </label>
           <input
