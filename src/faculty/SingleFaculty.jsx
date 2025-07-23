@@ -74,7 +74,7 @@ export default function SingleFaculty() {
         disableRotation={false}
       />
 
-      {/* Foreground Content */}
+    
       <div style={{ position: "relative", zIndex: 1, color: "white" }}>
         <div className="container py-5">
           <div className="text-center mb-5">

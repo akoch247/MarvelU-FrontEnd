@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useApi } from "../api/ApiContext";
 import { useAuth } from "../auth/AuthContext";
+import Particles from "../particles/Particles";
 
 export default function SingleDepartment() {
   const { departmentId } = useParams();
@@ -75,113 +76,135 @@ export default function SingleDepartment() {
   if (department === false) return <div>Department not found.</div>;
 
   return (
-    <div
-      className="py-4 text-white"
-      style={{ maxWidth: "800px", margin: "0 auto" }}
-    >
-      <div className="text-center">
-        <h2>{department.department}</h2>
-        <img
-          src={department.banner_image_url}
-          alt="Department Banner"
-          className="img-fluid mb-3"
-          style={{ maxWidth: "100%", height: "auto" }}
+    <div style={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
+      {/* Background Particles */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 0 }}>
+        <Particles
+          particleColors={["#ffffff", "#ffffff"]}
+          particleCount={200}
+          particleSpread={4}
+          speed={0.2}
+          particleBaseSize={100}
+          moveParticlesOnHover={true}
+          alphaParticles={false}
+          disableRotation={false}
         />
-        <p className="lead text-white-50">{department.description}</p>
       </div>
 
-      <div>
-        <h4 className="mt-4">Faculty of {department.department}</h4>
-        {profsInDepartment.map((prof) => (
-          <div key={prof.id} className="d-flex align-items-center mb-3">
-            <img
-              src={prof.profile_image_url}
-              alt={prof.name}
-              className="rounded-circle me-3"
-              style={{ width: "80px", height: "80px", objectFit: "cover" }}
-            />
-            <div>
-              <h5>{prof.name}</h5>
-              <p className="mb-0">
-                <strong>Email:</strong> {prof.email}
-              </p>
-            </div>
-            {token && (
-              <button
-                onClick={() => updateProfessorDepartment(prof.id, null)}
-                className="btn btn-sm btn-outline-warning ms-auto"
-              >
-                Remove
-              </button>
-            )}
-          </div>
-        ))}
-        {profsInDepartment.length === 0 && <p>No professors assigned.</p>}
-      </div>
+      
+      <div
+        className="py-4 text-white"
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "800px",
+          margin: "0 auto",
+        }}
+      >
+        <div className="text-center">
+          <h2>{department.department}</h2>
+          <img
+            src={department.banner_image_url}
+            alt="Department Banner"
+            className="img-fluid mb-3"
+            style={{ maxWidth: "100%", height: "auto" }}
+          />
+          <p className="lead text-white-50">{department.description}</p>
+        </div>
 
-      {token && (
-        <>
-          <div className="mt-5">
-            <h4>Edit Department</h4>
-            <form onSubmit={handleEditSubmit} className="row g-3">
-              <div className="col-md-4">
-                <label className="form-label">Name</label>
-                <input
-                  type="text"
-                  name="department"
-                  value={editForm.department || ""}
-                  onChange={handleEditChange}
-                  className="form-control"
-                />
+        <div>
+          <h4 className="mt-4">Faculty of {department.department}</h4>
+          {profsInDepartment.map((prof) => (
+            <div key={prof.id} className="d-flex align-items-center mb-3">
+              <img
+                src={prof.profile_image_url}
+                alt={prof.name}
+                className="rounded-circle me-3"
+                style={{ width: "80px", height: "80px", objectFit: "cover" }}
+              />
+              <div>
+                <h5>{prof.name}</h5>
+                <p className="mb-0">
+                  <strong>Email:</strong> {prof.email}
+                </p>
               </div>
-              <div className="col-md-8">
-                <label className="form-label">Banner Image URL</label>
-                <input
-                  type="text"
-                  name="banner_image_url"
-                  value={editForm.banner_image_url || ""}
-                  onChange={handleEditChange}
-                  className="form-control"
-                />
-              </div>
-              <div className="col-12">
-                <button type="submit" className="btn btn-primary">
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
-
-          <div className="mt-5">
-            <h4>Add Professors to {department.department}</h4>
-            {availableProfs.map((prof) => (
-              <div key={prof.id} className="d-flex align-items-center mb-2">
-                <img
-                  src={prof.profile_image_url}
-                  alt={prof.name}
-                  className="rounded-circle me-3"
-                  style={{ width: "80px", height: "80px", objectFit: "cover" }}
-                />
-                <div>
-                  <h5>{prof.name}</h5>
-                  <p className="mb-0">{prof.email}</p>
-                </div>
+              {token && (
                 <button
-                  className="btn btn-sm btn-outline-success ms-auto"
-                  onClick={() =>
-                    updateProfessorDepartment(prof.id, department.id)
-                  }
+                  onClick={() => updateProfessorDepartment(prof.id, null)}
+                  className="btn btn-sm btn-outline-warning ms-auto"
                 >
-                  Add
+                  Remove
                 </button>
-              </div>
-            ))}
-            {availableProfs.length === 0 && (
-              <p>No available professors to add.</p>
-            )}
-          </div>
-        </>
-      )}
+              )}
+            </div>
+          ))}
+          {profsInDepartment.length === 0 && <p>No professors assigned.</p>}
+        </div>
+
+        {token && (
+          <>
+            <div className="mt-5">
+              <h4>Edit Department</h4>
+              <form onSubmit={handleEditSubmit} className="row g-3">
+                <div className="col-md-4">
+                  <label className="form-label">Name</label>
+                  <input
+                    type="text"
+                    name="department"
+                    value={editForm.department || ""}
+                    onChange={handleEditChange}
+                    className="form-control"
+                  />
+                </div>
+                <div className="col-md-8">
+                  <label className="form-label">Banner Image URL</label>
+                  <input
+                    type="text"
+                    name="banner_image_url"
+                    value={editForm.banner_image_url || ""}
+                    onChange={handleEditChange}
+                    className="form-control"
+                  />
+                </div>
+                <div className="col-12">
+                  <button type="submit" className="btn btn-primary">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <div className="mt-5">
+              <h4>Add Professors to {department.department}</h4>
+              {availableProfs.map((prof) => (
+                <div key={prof.id} className="d-flex align-items-center mb-2">
+                  <img
+                    src={prof.profile_image_url}
+                    alt={prof.name}
+                    className="rounded-circle me-3"
+                    style={{ width: "80px", height: "80px", objectFit: "cover" }}
+                  />
+                  <div>
+                    <h5>{prof.name}</h5>
+                    <p className="mb-0">{prof.email}</p>
+                  </div>
+                  <button
+                    className="btn btn-sm btn-outline-success ms-auto"
+                    onClick={() =>
+                      updateProfessorDepartment(prof.id, department.id)
+                    }
+                  >
+                    Add
+                  </button>
+                </div>
+              ))}
+              {availableProfs.length === 0 && (
+                <p>No available professors to add.</p>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
