@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Particles from "../particles/Particles";
 
+import BlurText from "../blurtext/BlurText";
+
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -60,10 +62,23 @@ export default function Login() {
             padding: "2rem",
             boxShadow: "0 0 15px rgba(255,255,255,0.1)",
             fontSize: "1rem",
+            margin: "0 auto",
           }}
           onSubmit={handleSubmit}
         >
-           <h5 className="mb-3 text-center text-white">Login</h5> 
+          <div
+            className="mb-4"
+            style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: "2rem", width: "%100", marginBottom: "1.5rem" }}
+          >
+
+            <BlurText
+              text="              Login"
+              delay={20}
+              animateBy="words"
+              direction="top"
+            
+            />
+          </div>
 
           <label htmlFor="email" style={{ color: "white" }}>
             Email

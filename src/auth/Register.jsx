@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import Particles from "../particles/Particles";
+import BlurText from "../blurtext/BlurText";
 
 export default function Register() {
   const { register } = useAuth();
@@ -61,9 +62,19 @@ export default function Register() {
             fontSize: "0.9rem",
           }}
         >
-          <h5 className="mb-3 text-center" style={{ color: "white" }}>
-            Register For An Account
-          </h5>
+        <div
+          className="mb-4"
+          style={{ textAlign: "center", color: "white", fontWeight: "bold", fontSize: "1.5rem" }}
+          >
+          <BlurText
+            text="Register For An Account"
+            delay={150}
+            animateBy="words"
+            direction="top"
+            className=""
+          />
+        </div>
+
           <label
             htmlFor="username"
             style={{ color: "white", fontSize: "0.9rem" }}
