@@ -15,9 +15,17 @@ export default function FacultyPage() {
         moveParticlesOnHover={true}
         alphaParticles={false}
         disableRotation={false}
+        style={{ 
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "200vh",
+          zIndex: 0,
+        }}
       />
 
-      <div style={{ position: "relative", zIndex: 1 }}>
+      <div style={{ position: "relative", zIndex: 1, paddingBottom: "2rem" }}>
         <h1 className="fw-bold text-center my-4 text-white">Faculty</h1>
         <AllFaculty />
       </div>
