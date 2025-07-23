@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useApi } from "../api/ApiContext";
 import { useAuth } from "../auth/AuthContext";
+import { motion } from "framer-motion";
 
 export function AllDepartments() {
   const [departments, setDepartments] = useState([]);
@@ -69,16 +70,23 @@ export function AllDepartments() {
   return (
     <div className="py-4" style={{ maxWidth: "800px", margin: "0 auto" }}>
       <div className="row justify-content-center">
-        {departments.map((dept) => {
+        {departments.map((dept, index) => {
           const deptProfessors = professors.filter(
             (prof) => prof.department_id === dept.id
           );
 
           return (
-            <div
+            <motion.div
               key={dept.id}
               className="col-12 mb-4 p-3 border rounded text-white"
               style={{ backgroundColor: "#1e1e1e" }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: index * 0.15,
+                duration: 0.6,
+                ease: "easeOut",
+              }}
             >
               <h3>
                 <Link
@@ -91,11 +99,18 @@ export function AllDepartments() {
 
               {deptProfessors.length > 0 ? (
                 <div className="d-flex flex-wrap gap-3">
-                  {deptProfessors.map((prof) => (
-                    <div
+                  {deptProfessors.map((prof, profIndex) => (
+                    <motion.div
                       key={prof.id}
                       className="d-flex flex-column align-items-center"
                       style={{ width: "150px" }}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        delay: index * 0.25 + profIndex * 0.25,
+                        duration: 0.5,
+                        ease: "easeOut",
+                      }}
                     >
                       <img
                         src={prof.profile_image_url}
@@ -110,7 +125,7 @@ export function AllDepartments() {
                       <p>
                         <strong>{prof.name}</strong>
                       </p>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               ) : (
@@ -125,7 +140,7 @@ export function AllDepartments() {
                   Delete Department
                 </button>
               )}
-            </div>
+            </motion.div>
           );
         })}
       </div>

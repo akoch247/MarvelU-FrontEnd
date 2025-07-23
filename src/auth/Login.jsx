@@ -52,6 +52,7 @@ export default function Login() {
           alignItems: "center",
         }}
       >
+
         <form
           className="w-100 rounded "
           style={{
@@ -62,7 +63,7 @@ export default function Login() {
           }}
           onSubmit={handleSubmit}
         >
-          <h5 className="mb-3 text-center text-white">Login</h5>
+           <h5 className="mb-3 text-center text-white">Login</h5> 
 
           <label htmlFor="email" style={{ color: "white" }}>
             Email

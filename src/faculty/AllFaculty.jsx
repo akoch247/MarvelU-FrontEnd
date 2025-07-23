@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useApi } from "../api/ApiContext";
 import { useAuth } from "../auth/AuthContext";
+import { motion } from "framer-motion"; 
 
 export default function AllFaculty() {
   const { token } = useAuth();
@@ -60,8 +61,18 @@ export default function AllFaculty() {
   return (
     <div className="container py-4 text-white">
       <div className="row justify-content-center">
-        {facultyList.map((prof) => (
-          <div key={prof.id} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        {facultyList.map((prof, index) => (
+          <motion.div
+            key={prof.id}
+            className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: index * 0.15, 
+              duration: 0.6,
+              ease: "easeOut",
+            }}
+          >
             <div
               className="shadow-sm rounded p-3 text-center h-100"
               style={{ backgroundColor: "#1e1e1e" }}
@@ -82,7 +93,7 @@ export default function AllFaculty() {
               </h5>
               <p className="text-light small">{prof.email}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
