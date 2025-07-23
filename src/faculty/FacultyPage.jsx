@@ -9,8 +9,8 @@ export default function FacultyPage() {
       <Particles
         particleColors={["#ffffff", "#ffffff"]}
         particleCount={200}
-        particleSpread={10}
-        speed={0.1}
+        particleSpread={4}
+        speed={0.2}
         particleBaseSize={100}
         moveParticlesOnHover={true}
         alphaParticles={false}

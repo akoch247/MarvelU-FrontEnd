@@ -33,8 +33,8 @@ export default function Login() {
     >
       <Particles
         particleColors={["#ffffff", "#cccccc"]}
-        particleCount={150}
-        particleSpread={15}
+        particleCount={400}
+        particleSpread={4}
         speed={0.2}
         particleBaseSize={100}
         moveParticlesOnHover={true}
